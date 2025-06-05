@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SelectBank - Сравнение и подбор банков</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Базовые стили */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --success: #2ecc71;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f5f7fa;
+        }
+        
+        /* Шапка */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem 2rem;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+        }
+        
+        .logo {
+            width: 50px;
+            height: 50px;
+            transition: transform 0.3s;
+        }
+        
+        .logo:hover {
+            transform: scale(1.1);
+        }
+        
+        .logo-text h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+        
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* Навигация */
+        nav {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.9;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-left: 2rem;
+        }
+        
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 0.9rem;
+        }
+        
+        .btn-primary {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Основной контент */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .search-section {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .search-bar {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 50px;
+            overflow: hidden;
+        }
+        
+        .search-bar input {
+            flex: 1;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        .search-bar button {
+            padding: 0 1.5rem;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .search-bar button:hover {
+            background-color: #2980b9;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Карточки банков */
+        .bank-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .bank-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .bank-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .bank-logo {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .bank-logo img {
+            max-height: 80px;
+            max-width: 80%;
+            object-fit: contain;
+        }
+        
+        .bank-info {
+            padding: 1.5rem;
+        }
+        
+        .bank-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .bank-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .bank-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-tag {
+            background-color: var(--light);
+            color: var(--dark);
+            padding: 0.3rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .bank-rating {
+            display: flex;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+        
+        .stars {
+            color: #f39c12;
+            margin-right: 0.5rem;
+        }
+        
+        .rating-value {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        /* Фильтр банков */
+        .filter-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 3rem;
+        }
+        
+        .filter-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            text-align: center;
+        }
+        
+        .filter-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .filter-group {
+            margin-bottom: 1rem;
+        }
+        
+        .filter-group h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            color: var(--dark);
+        }
+        
+        .filter-checkbox {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .filter-checkbox input {
+            margin-right: 0.5rem;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .filter-checkbox label {
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .filter-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .filter-results {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+        }
+        
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: slideDown 0.3s;
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .close {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close:hover {
+            color: var(--dark);
+        }
+        
+        /* Футер */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 2rem 2rem;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-column h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 0.6rem;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.85rem;
+            color: #bbb;
+        }
+        
+        /* Кнопка "Наверх" */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 99;
+        }
+        
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-to-top:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .auth-buttons {
+                margin-left: 1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            nav {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                height: 100vh;
+                background-color: var(--primary);
+                flex-direction: column;
+                padding: 2rem;
+                transition: left 0.3s;
+                z-index: 90;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .auth-buttons {
+                margin-left: 0;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .bank-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="header-container">
+            <div class="logo-container" id="logo">
+                <img src="images/logo-coin.gif" alt="SelectBank Logo" class="logo">
+                <div class="logo-text">
+                    <h1>SelectBank</h1>
+                    <p>Ваш помощник в выборе лучшего банка</p>
+                </div>
+            </div>
+            
+            <nav>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#">Главная</a></li>
+                    <li><a href="#">Рейтинги</a></li>
+                    <li><a href="#">Сравнение</a></li>
+                    <li><a href="#">Блог</a></li>
+                    <li><a href="#">Контакты</a></li>
+                </ul>
+                
+                <div class="auth-buttons">
+                    <a href="login.html" class="btn btn-outline">Вход</a>
+                    <a href="register.html" class="btn btn-primary">Регистрация</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <div class="container">
+        <!-- Поиск -->
+        <section class="search-section">
+            <div class="section-title">
+                <h2>Найдите лучший банк для себя</h2>
+                <p>Сравните условия, тарифы и услуги банков России</p>
+            </div>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Поиск банков...">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        </section>
+        
+        <!-- Карточки банков -->
+        <section class="banks-section">
+            <div class="section-title">
+                <h2>Популярные банки</h2>
+                <p>Выберите банк для просмотра подробной информации</p>
+            </div>
+            
+            <div class="bank-grid">
+                <!-- Сбербанк -->
+                <div class="bank-card" onclick="window.location.href='sberbank.html'">
+                    <div class="bank-logo">
+                        <img src="images/logo-sber.png" alt="Сбербанк">
+                    </div>
+                    <div class="bank-info">
+                        <h3 class="bank-name">Сбербанк</h3>
+                        <p class="bank-description">Крупнейший банк России с широкой сетью отделений и лучшим кэшбэком</p>
+                        <div class="bank-features">
+                            <span class="feature-tag">Кэшбэк до 10%</span>
+                            <span class="feature-tag">Бесплатное обслуживание</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ВТБ -->
+                <div class="bank-card" onclick="window.location.href='vtb.html'">
+                    <div class="bank-logo">
+                        <img src="images/logo-vtb.png" alt="ВТБ">
+                    </div>
+                    <div class="bank-info">
+                        <h3 class="bank-name">ВТБ</h3>
+                        <p class="bank-description">Надежный банк для бизнеса и частных клиентов с выгодными кредитами</p>
+                        <div class="bank-features">
+                            <span class="feature-tag">Ипотека от 5%</span>
+                            <span class="feature-tag">Мобильный банк</span>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="bank-card" onclick="window.location.href='gazprom.html'">
+                    <div class="bank-logo">
+                        <img src="D:\Sublime Text 3\SelectBank\images\logo-gazprom.png" alt="Газпромбанк">
+                    </div>
+                    <div class="bank-info">
+                        <h3 class="bank-name">Газпромбанк</h3>
+                        <p class="bank-description">Надежный банк для бизнеса и частных клиентов с выгодными кредитами</p>
+                        <div class="bank-features">
+                            <span class="feature-tag">Ипотека от 5%</span>
+                            <span class="feature-tag">Мобильный банк</span>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="bank-card" onclick="window.location.href='rosselhozbank.html'">
+                    <div class="bank-logo">
+                        <img src="D:\Sublime Text 3\SelectBank\images\logo-rshb.png" alt="Россельхозбанк">
+                    </div>
+                    <div class="bank-info">
+                        <h3 class="bank-name">Россельхозбанк</h3>
+                        <p class="bank-description">Надежный банк для бизнеса и частных клиентов с выгодными кредитами</p>
+                        <div class="bank-features">
+                            <span class="feature-tag">Ипотека от 5%</span>
+                            <span class="feature-tag">Мобильный банк</span>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="bank-card" onclick="window.location.href='T-Bank.html'">
+                    <div class="bank-logo">
+                        <img src="D:\Sublime Text 3\SelectBank\images\logo-T-Bank.png" alt="Т-Банк">
+                    </div>
+                    <div class="bank-info">
+                        <h3 class="bank-name">Т-Банк</h3>
+                        <p class="bank-description">Надежный банк для бизнеса и частных клиентов с выгодными кредитами</p>
+                        <div class="bank-features">
+                            <span class="feature-tag">Ипотека от 5%</span>
+                            <span class="feature-tag">Мобильный банк</span>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="bank-card"  onclick="window.location.href='alfa-bank.html'">
+                    <div class="bank-logo">
+                        <img src="D:\Sublime Text 3\SelectBank\images\logo-alfa-bank.png" alt="Альфа-Банк">
+                    </div>
+                    <div class="bank-info">
+                        <h3 class="bank-name">Альфа-Банк</h3>
+                        <p class="bank-description">Надежный банк для бизнеса и частных клиентов с выгодными кредитами</p>
+                        <div class="bank-features">
+                            <span class="feature-tag">Ипотека от 5%</span>
+                            <span class="feature-tag">Мобильный банк</span>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="bank-card"  onclick="window.location.href='raiffeisenbank.html'">
+                    <div class="bank-logo">
+                        <img src="D:\Sublime Text 3\SelectBank\images\logo-raiffeisenbank.png" alt="Райффайзен Банк">
+                    </div>
+                    <div class="bank-info">
+                        <h3 class="bank-name">Райффайзен Банк</h3>
+                        <p class="bank-description">Надежный банк для бизнеса и частных клиентов с выгодными кредитами</p>
+                        <div class="bank-features">
+                            <span class="feature-tag">Ипотека от 5%</span>
+                            <span class="feature-tag">Мобильный банк</span>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="bank-card"  onclick="window.location.href='Otkritie.html'">
+                    <div class="bank-logo">
+                        <img src="D:\Sublime Text 3\SelectBank\images\logo-Otkritie.png" alt="Открытие">
+                    </div>
+                    <div class="bank-info">
+                        <h3 class="bank-name">Открытие</h3>
+                        <p class="bank-description">Надежный банк для бизнеса и частных клиентов с выгодными кредитами</p>
+                        <div class="bank-features">
+                            <span class="feature-tag">Ипотека от 5%</span>
+                            <span class="feature-tag">Мобильный банк</span>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="bank-card"  onclick="window.location.href='sovkombank.html'">
+                    <div class="bank-logo">
+                        <img src="D:\Sublime Text 3\SelectBank\images\logo-sovkombank.png" alt="Совкомбанк">
+                    </div>
+                    <div class="bank-info">
+                        <h3 class="bank-name">Совкомбанк</h3>
+                        <p class="bank-description">Надежный банк для бизнеса и частных клиентов с выгодными кредитами</p>
+                        <div class="bank-features">
+                            <span class="feature-tag">Ипотека от 5%</span>
+                            <span class="feature-tag">Мобильный банк</span>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="bank-card"  onclick="window.location.href='mkb.html'">
+                    <div class="bank-logo">
+                        <img src="D:\Sublime Text 3\SelectBank\images\logo-mkb.png" alt="МКБ">
+                    </div>
+                    <div class="bank-info">
+                        <h3 class="bank-name">МКБ</h3>
+                        <p class="bank-description">Надежный банк для бизнеса и частных клиентов с выгодными кредитами</p>
+                        <div class="bank-features">
+                            <span class="feature-tag">Ипотека от 5%</span>
+                            <span class="feature-tag">Мобильный банк</span>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="bank-card"  onclick="window.location.href='rosbank.html'">
+                    <div class="bank-logo">
+                        <img src="D:\Sublime Text 3\SelectBank\images\logo-rosbank.png" alt="РОСБАНК">
+                    </div>
+                    <div class="bank-info">
+                        <h3 class="bank-name">РОСБАНК</h3>
+                        <p class="bank-description">Надежный банк для бизнеса и частных клиентов с выгодными кредитами</p>
+                        <div class="bank-features">
+                            <span class="feature-tag">Ипотека от 5%</span>
+                            <span class="feature-tag">Мобильный банк</span>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="bank-card"  onclick="window.location.href='psb.html'">
+                    <div class="bank-logo">
+                       <img src="D:\Sublime Text 3\SelectBank\images\logo-psb.png" alt="Промсвязьбанк">
+                    </div>
+                    <div class="bank-info">
+                        <h3 class="bank-name">Промсвязьбанк</h3>
+                        <p class="bank-description">Надежный банк для бизнеса и частных клиентов с выгодными кредитами</p>
+                        <div class="bank-features">
+                            <span class="feature-tag">Ипотека от 5%</span>
+                            <span class="feature-tag">Мобильный банк</span>
+                        </div>
+                       
+                    </div>
+                </div>
+
+                <div class="bank-card"  onclick="window.location.href='unicredit.html'">
+                    <div class="bank-logo">
+                       <img src="D:\Sublime Text 3\SelectBank\images\logo-unicredit.png" alt="ЮниКредит">
+                    </div>
+                    <div class="bank-info">
+                        <h3 class="bank-name">ЮниКредит</h3>
+                        <p class="bank-description">Надежный банк для бизнеса и частных клиентов с выгодными кредитами</p>
+                        <div class="bank-features">
+                            <span class="feature-tag">Ипотека от 5%</span>
+                            <span class="feature-tag">Мобильный банк</span>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <!-- Добавьте остальные банки по аналогии -->
+                
+            </div>
+        </section>
+        
+        <!-- Фильтр банков -->
+        <section class="filter-section">
+            <h2 class="filter-title">Подбор банка по параметрам</h2>
+            
+            <form id="bankFilterForm">
+                <div class="filter-options">
+                    <div class="filter-group">
+                        <h4>Тип карты</h4>
+                        <div class="filter-checkbox">
+                            <input type="checkbox" id="debit" name="debit">
+                            <label for="debit">Дебетовая</label>
+                        </div>
+                        <div class="filter-checkbox">
+                            <input type="checkbox" id="credit" name="credit">
+                            <label for="credit">Кредитная</label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4>Преимущества</h4>
+                        <div class="filter-checkbox">
+                            <input type="checkbox" id="cashback" name="cashback">
+                            <label for="cashback">Кэшбэк</label>
+                        </div>
+                        <div class="filter-checkbox">
+                            <input type="checkbox" id="low-interest" name="low-interest">
+                            <label for="low-interest">Низкий процент</label>
+                        </div>
+                        <div class="filter-checkbox">
+                            <input type="checkbox" id="mobile-app" name="mobile-app">
+                            <label for="mobile-app">Мобильное приложение</label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4>Обслуживание</h4>
+                        <div class="filter-checkbox">
+                            <input type="checkbox" id="free" name="free">
+                            <label for="free">Бесплатное</label>
+                        </div>
+                        <div class="filter-checkbox">
+                            <input type="checkbox" id="premium" name="premium">
+                            <label for="premium">Премиум</label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4>Дополнительно</h4>
+                        <div class="filter-checkbox">
+                            <input type="checkbox" id="insurance" name="insurance">
+                            <label for="insurance">Страхование</label>
+                        </div>
+                        <div class="filter-checkbox">
+                            <input type="checkbox" id="investments" name="investments">
+                            <label for="investments">Инвестиции</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="filter-actions">
+                    <button type="button" class="btn btn-primary" id="applyFilters">Применить фильтры</button>
+                    <button type="reset" class="btn btn-outline">Сбросить</button>
+                </div>
+            </form>
+            
+            <div class="filter-results">
+                <h3>Найдено банков: <span id="banksCount">12</span></h3>
+                <div id="filteredBanksList" class="bank-grid">
+                    <!-- Здесь будут отображаться отфильтрованные банки -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Модальное окно -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Поддержите проект</h2>
+            <p>Мы стараемся предоставлять актуальную и полезную информацию о банках. Если вам нравится наш сервис, вы можете поддержать его развитие.</p>
+            
+            <div style="margin: 1.5rem 0;">
+                <h3 style="margin-bottom: 0.5rem;">Способы поддержки:</h3>
+                <ul style="margin-left: 1.5rem;">
+                    <li><strong>Тинькофф:</strong> 5536 9138 3257 4567</li>
+                    <li><strong>СБП:</strong> +7 (916) 722-83-21</li>
+                    <li><strong>Крипто:</strong> 0x71C7656EC7ab88b098defB751B7401B5f6d8976F</li>
+                </ul>
+            </div>
+            
+            <p style="font-size: 0.9rem; color: var(--gray);">Спасибо за вашу поддержку! ❤️</p>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4>Компания</h4>
+                <ul>
+                    <li><a href="#">О нас</a></li>
+                    <li><a href="#">Карьера</a></li>
+                    <li><a href="#">Новости</a></li>
+                    <li><a href="#">Блог</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Поддержка</h4>
+                <ul>
+                    <li><a href="#">Контакты</a></li>
+                    <li><a href="faq.html">Частые вопросы</a></li>
+                    <li><a href="#">Центр помощи</a></li>
+                    <li><a href="#">Обратная связь</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Услуги</h4>
+                <ul>
+                    <li><a href="#">Банковские продукты</a></li>
+                    <li><a href="#">Кредиты</a></li>
+                    <li><a href="#">Депозиты</a></li>
+                    <li><a href="#">Страхование</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Контакты</h4>
+                <ul>
+                    <li><a href="tel:+79167228321">+7 (916) 722-83-21</a></li>
+                    <li><a href="mailto:info@selectbank.ru">info@selectbank.ru</a></li>
+                </ul>
+                
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 SelectBank. Все права защищены.</p>
+            <p><a href="#">Политика конфиденциальности</a> | <a href="#">Пользовательское соглашение</a></p>
+        </div>
+    </footer>
+    
+    <!-- Кнопка "Наверх" -->
+    <button id="scrollToTop" class="scroll-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Мобильное меню
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Модальное окно
+        const modal = document.getElementById('modal');
+        const logo = document.getElementById('logo');
+        const closeBtn = document.querySelector('.close');
+        
+        logo.addEventListener('click', () => {
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Кнопка "Наверх"
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Фильтрация банков (заглушка)
+        document.getElementById('applyFilters').addEventListener('click', () => {
+            alert('Фильтры применены! В реальном приложении здесь будет фильтрация банков.');
+        });
+        
+        // Поиск банков (заглушка)
+        document.querySelector('.search-bar button').addEventListener('click', () => {
+            const searchTerm = document.querySelector('.search-bar input').value;
+            if (searchTerm) {
+                alert(`Поиск по запросу: "${searchTerm}". В реальном приложении здесь будет поиск банков.`);
+            }
+        });
+    </script>
+</body>
+</html>

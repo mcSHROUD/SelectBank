@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SelectBank - Кредитные продукты Сбербанка</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .product-info {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #D8BFD8;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .product-info h2 {
+            color: #007bff;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .product-info img {
+            width: 280px;
+            height: 88px;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .section ul {
+            padding-left: 20px;
+        }
+        .section li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        .highlight {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <h1>SelectBank - Кредитные продукты Сбербанка</h1>
+    </header>
+
+    <!-- Основной контент -->
+    <div class="container">
+        <div class="bank-info">
+            <img src="D:\Sublime Text 3\SelectBank\images\logo-sber.png" alt="Сбербанк">
+            <h2>Сбербанк</h2>
+            <p>Крупнейший банк России с широким выбором кредитных продуктов для всех категорий клиентов.</p>
+        </div>
+
+        <!-- Динамически вставляемые продукты из JSON -->
+        <div id="productsContainer"></div>
+
+        <button class="back-button" onclick="window.location.href='index.html'">Назад к списку банков</button>
+        <button class="compare-button" onclick="addToComparison('Сбербанк')">Сравнить</button>
+    </div>
+
+    <script>
+        // JSON данные (можно вынести в отдельный файл)
+        const products = [
+            {
+                    "bank": "Сбербанк",
+    "productType": "Кредит наличными",
+    "sections": {
+      "Общие условия": {
+        "amountRange": {
+          "from": "10 000 ₽",
+          "to": "20 000 000 ₽"
+        },
+        "fullCostPercentRange": {
+          "from": "26.9%",
+          "to": "44.8%"
+        },
+        "rateFrom": "26.9%"
+      },
+      "Требования к заёмщику": {
+        "citizenship": "Гражданин РФ",
+        "ageLimit": "От 18 до 80 лет на момент полного погашения кредита"
+      },
+      "Ставки по кредиту": {
+        "rateCalculationNote": "Ставка рассчитывается индивидуально для каждого клиента",
+        "termRangeMonths": {
+          "from": 3,
+          "to": 60
+        },
+        "specialConditions": [
+          {
+            "condition": "Получаю зарплату или пенсию в Сбере",
+            "amountFrom": "10 000 ₽",
+            "fullCostRange": {
+              "from": "24.9%",
+              "to": "44.8%"
+            },
+            "rateFrom": "24.9%"
+          }
+        ]
+      },
+      "Требования к заёмщику (полные)": {
+        "citizenship": "Гражданин РФ",
+        "ageLimit": "От 18 до 80 лет",
+        "workExperience": "От 1 месяца или от 6 месяцев, если не получаете зарплату на карту СберБанка",
+        "incomeProof": "Если зарплата или пенсия поступает не на карту или счёт в Сбере, может понадобиться подтверждение дохода. Это можно сделать через Госуслуги без визита в банк"
+      }
+    }
+  },
+  {
+    "bank": "Сбербанк",
+    "productType": "Кредит под залог недвижимости",
+    "description": "Получите деньги на любые цели",
+    "sections": {
+      "Основные условия": {
+        "term": {
+          "from": "1 год",
+          "to": "20 лет"
+        },
+        "amountRange": {
+          "from": "300 000 ₽",
+          "to": "20 000 000 ₽"
+        },
+        "rates": {
+          "base": "от 25.3%",
+          "family": "от 6%",
+          "military": "от 24.1%"
+        }
+      },
+      "Условия кредитования": {
+        "currency": "Рубли РФ",
+        "minAmount": "300 000 ₽",
+        "maxAmount": "20 000 000 ₽ или 60% от оценочной стоимости недвижимости",
+        "term": {
+          "from": "1 год",
+          "to": "20 лет"
+        },
+        "commission": "Отсутствует",
+        "collateral": [
+          "квартира",
+          "таунхаус",
+          "апартаменты",
+          "земельный участок",
+          "земельный участок с домом",
+          "гараж с участком или без"
+        ],
+        "insurance": "Страхование залога в соответствии с требованиями банка"
+      },
+      "Процентные ставки": {
+        "fullCostRange": {
+          "from": "26.841%",
+          "to": "31.686%"
+        },
+        "baseRate": "27.5%",
+        "minRate": "26.5%"
+      },
+      "Требования к заёмщику": {
+        "ageStart": "от 18 лет",
+        "ageEnd": "до 75 лет на момент возврата",
+        "workExperience": "Не менее 3 месяцев на текущем месте работы",
+        "coBorrowers": {
+          "required": false,
+          "notes": "Включаются супруг(а) и иные лица, чьи доходы учитываются"
+        },
+        "citizenship": "Российская Федерация"
+      }
+    }
+  },
+  {
+    "bank": "Сбербанк",
+    "productType": "Кредит на образование с господдержкой",
+    "sections": {
+      "Условия": {
+        "currency": "Рубли",
+        "amount": "Равна стоимости обучения",
+        "term": {
+          "description": "Льготный период (время учёбы + 9 мес.) + период погашения (до 15 лет)"
+        },
+        "gracePeriod": {
+          "year1": "40% от начисленных процентов",
+          "year2": "60%",
+          "fromYear3": "100%",
+          "afterGraduation": "Через 9 мес. — начинается погашение основного долга"
+        },
+        "commission": "Нет",
+        "collateral": "Не нужен",
+        "insurance": "Нет"
+      },
+      "Ставки": {
+        "fullCost": "3%",
+        "borrowerRate": "3%",
+        "effectiveRate": "22.22%",
+        "note": "Разницу оплачивает государство. При отчислении — выплата по полной ставке."
+      },
+      "Требования к заёмщику": {
+        "age": "от 14 лет",
+        "parentalConsent": "от 14 до 18 лет — требуется согласие родителей",
+        "guardianNote": "Несовершеннолетним под опекой кредит не выдаётся",
+        "citizenship": "Российская Федерация",
+        "status": "Абитуриент или студент вуза/суза"
+      }
+    }
+  }
+];
+
+        // Функция для отображения продуктов
+        function renderProducts() {
+            const container = document.getElementById('productsContainer');
+            
+            products.forEach(product => {
+                const productHTML = `
+                    <div class="product-info">
+                        <h2>${product.productType}</h2>
+                        ${product.description ? `<p class="highlight">${product.description}</p>` : ''}
+                        
+                        ${Object.entries(product.sections).map(([sectionName, sectionData]) => `
+                            <div class="section">
+                                <h3>${sectionName}</h3>
+                                <ul>
+                                    ${Object.entries(sectionData).map(([key, value]) => {
+                                        if (Array.isArray(value)) {
+                                            return `<li><strong>${key}:</strong> ${value.join(', ')}</li>`;
+                                        } else if (typeof value === 'object') {
+                                            return Object.entries(value).map(([subKey, subValue]) => 
+                                                `<li><strong>${subKey}:</strong> ${subValue}</li>`
+                                            ).join('');
+                                        } else {
+                                            return `<li><strong>${key}:</strong> ${value}</li>`;
+                                        }
+                                    }).join('')}
+                                </ul>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                
+                container.innerHTML += productHTML;
+            });
+        }
+
+        // Функция для сравнения
+        function addToComparison(bankName) {
+            let comparisonList = JSON.parse(localStorage.getItem('comparisonList')) || [];
+            
+            if (!comparisonList.includes(bankName)) {
+                comparisonList.push(bankName);
+                localStorage.setItem('comparisonList', JSON.stringify(comparisonList));
+                alert(`${bankName} добавлен в список сравнения!`);
+            } else {
+                alert(`${bankName} уже в списке сравнения!`);
+            }
+            
+            window.location.href = 'compare.html';
+        }
+
+        // Загружаем продукты при открытии страницы
+        document.addEventListener('DOMContentLoaded', renderProducts);
+    </script>
+</body>
+</html>

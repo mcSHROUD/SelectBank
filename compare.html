@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SelectBank - Сравнение банков</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <h1>SelectBank - Сравнение банков</h1>
+    </header>
+
+    <!-- Основной контент -->
+    <div class="container">
+        <h2>Сравнение банков</h2>
+        <table id="comparison-table">
+            <thead>
+                <tr>
+                    <th>Параметр</th>
+                    <th id="selected-bank"></th>
+                    <th>Другие банки</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Данные будут добавлены с помощью JavaScript -->
+            </tbody>
+        </table>
+        <button class="back-button" onclick="window.location.href='index.html'">Назад к списку банков</button>
+    </div>
+
+    <script>
+        // Данные о банках
+        const banksData = {
+            "Сбербанк": { rate: "5.5%", term: "От 3 месяцев", rating: "★★★★★" },
+            "ВТБ": { rate: "6.0%", term: "От 6 месяцев", rating: "★★★★☆" },
+            "Газпромбанк": { rate: "5.8%", term: "От 1 года", rating: "★★★★☆" },
+            "Россельхозбанк": { rate: "5.7%", term: "От 3 месяцев", rating: "★★★☆☆" },
+            "ФК «Открытие»": { rate: "6.2%", term: "От 6 месяцев", rating: "★★★★☆" },
+            "Юникредит Банк": { rate: "5.9%", term: "От 1 года", rating: "★★★★☆" },
+            "Райффайзенбанк": { rate: "6.1%", term: "От 6 месяцев", rating: "★★★★★" },
+            "Промсвязьбанк": { rate: "5.6%", term: "От 3 месяцев", rating: "★★★☆☆" },
+            "Альфа-Банк": { rate: "6.3%", term: "От 1 года", rating: "★★★★★" },
+            "Росбанк": { rate: "5.4%", term: "От 6 месяцев", rating: "★★★☆☆" },
+            "Московский Кредитный Банк": { rate: "6.0%", term: "От 3 месяцев", rating: "★★★★☆" },
+            "Совкомбанк": { rate: "6.5%", term: "От 6 месяцев", rating: "★★★★☆" },
+            "Т-Банк": { rate: "5.3%", term: "От 1 года", rating: "★★★☆☆" }
+        };
+
+        // Получаем выбранный банк из localStorage
+        const comparisonList = JSON.parse(localStorage.getItem('comparisonList')) || [];
+        const selectedBank = comparisonList[0]; // Первый банк в списке
+
+        // Отображаем данные в таблице
+        const comparisonTable = document.getElementById('comparison-table');
+        const selectedBankHeader = document.getElementById('selected-bank');
+        const tbody = comparisonTable.querySelector('tbody');
+
+        if (selectedBank) {
+            // Заголовок для выбранного банка
+            selectedBankHeader.textContent = selectedBank;
+
+            // Добавляем строки с данными
+            const parameters = ["Процентная ставка", "Условия вклада", "Рейтинг"];
+            parameters.forEach(param => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${param}</td>
+                    <td>${banksData[selectedBank][param.toLowerCase().replace(' ', '')]}</td>
+                    <td>
+                        <ul>
+                            ${Object.keys(banksData)
+                                .filter(bank => bank !== selectedBank)
+                                .map(bank => `<li><strong>${bank}:</strong> ${banksData[bank][param.toLowerCase().replace(' ', '')]}</li>`)
+                                .join('')}
+                        </ul>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        } else {
+            tbody.innerHTML = '<tr><td colspan="3">Вы пока не добавили банки для сравнения.</td></tr>';
+        }
+    </script>
+</body>
+</html>

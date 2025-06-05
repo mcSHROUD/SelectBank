@@ -1,0 +1,567 @@
+/* Общие стили для всех страниц */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #30024d   ;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Шапка */
+header {
+    background-color: #36273f;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+}
+
+/* Контейнер (ПОДЛОЖКА ПОД КАРТОЧКАМИ ()) для контента */
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #b5abb5;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.bank-info h2 {
+            color: #ffffff;
+        }
+/* Сетка карточек на главной странице !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+.bank-grid {
+    display: flex;
+    flex-direction: column; /* Карточки в один столбец */
+    align-items: center; /* Выравнивание по центру */
+    gap: 20px; /* Отступы между карточками */
+}
+
+.bank-card {
+    width: 80%; /* Карточка занимает 80% ширины экрана */
+    max-width: 600px; /* Ограничение максимальной ширины */
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bank-card img {
+    width: 80px;
+    height: auto;
+    margin-right: 20px;
+}
+
+.bank-card h3 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.bank-card p {
+    margin: 5px 0 0;
+    font-size: 16px;
+    color: #666;
+}
+
+
+
+
+.bank-card img {
+    transition: transform 0.3s ease;
+}
+
+.bank-card:hover img {
+    transform: scale(1.1); /* Увеличивает логотип при наведении */
+}
+
+
+/* ИЗМЕНЁННЫЕ КАРТОЧКИ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+.bank-container {
+  display: flex;
+  flex-direction: column; /* Столбцом */
+  align-items: center; /* Центрируем карточки */
+  gap: 20px; /* Добавляем отступы */
+}
+
+.bank-card {
+  width: 80%; /* Увеличиваем ширину карточки */
+  max-width: 800px; /* Ограничиваем ширину */
+  height: 200px; /* Делаем прямоугольные */
+  border-radius: 15px; /* Закругляем углы */
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.bank-card img {
+  width: 150px; /* Фиксированный размер логотипа */
+  height: auto;
+  margin-right: 20px;
+}
+
+
+
+
+
+/* Кнопка "Назад" */
+.back-button {
+    background-color: #8a2be2;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.back-button:hover {
+    background-color: #7b1fa2;
+}
+.compare-button {
+    background-color: #8a2be2;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+/* Кнопки в шапке */
+.header-buttons {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px; /* Расстояние между кнопками */
+}
+
+/* Кнопка входа/регистрации!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+.login-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #8a2be2;
+    color: #fff;
+    padding: 5px 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #7b1fa2;
+}
+/* Кнопка входа/регистрации!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+
+/* Логотип !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+.logo {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+}
+
+.logo img {
+    width: 60px; /* Размер гифки */
+    height: auto;
+}
+
+/* Заголовок */
+header h1 {
+    margin: 0;
+    text-align: center;
+    font-size: 36px;
+    color: #fff;
+}
+
+/* Кнопки в шапке */
+.header-buttons {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+/* Остальные стили остаются без изменений */
+/* Модальное окно */
+.modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    color: #8a2be2;
+}
+
+.modal-content p {
+    margin: 10px 0;
+    color: #333;
+}
+
+/* Кнопка закрытия */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #888;
+}
+
+.close:hover {
+    color: #000;
+}
+#logo {
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+footer {
+    background-color: #111;
+    color: white;
+    padding: 30px 0;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 200px;
+    margin: 10px;
+}
+
+.footer-column h4 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #ccc;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+    color: #bbb;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-column ul li a:hover {
+    color: white;
+}
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    display: none; /* Изначально скрываем */
+    transition: background 0.3s, opacity 0.3s;
+}
+
+.scroll-to-top:hover {
+    background-color: #666;
+}
+
+.scroll-to-top.show {
+    display: block; /* Показываем кнопку при прокрутке */
+}
+
+
+
+
+/* Теперь вместо стандартных чекбоксов появятся аккуратные квадратные с галочками. */
+.filter-section {
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1); /* Полупрозрачный фон */
+    border-radius: 12px;
+    color: #e0e0e0; /* Светлый текст */
+}
+.filter-section {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.filter-section h2 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #ffffff; /* Белый текст */
+}
+
+.filter-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.filter-section label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+}
+
+
+
+.filter-section label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 30px;
+}
+
+.filter-section input[type="checkbox"] {
+    appearance: none;
+    position: absolute;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background: #222;
+    border-radius: 4px;
+    border: 2px solid #7a5cff;
+    transition: 0.3s;
+}
+
+.filter-section input[type="checkbox"]:checked {
+    background: #7a5cff;
+}
+
+.filter-section input[type="checkbox"]::before {
+    content: '✔';
+    font-size: 14px;
+    color: white;
+    position: absolute;
+    left: 3px;
+    top: -1px;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.filter-section input[type="checkbox"]:checked::before {
+    opacity: 1;
+}
+
+.filter-section input[type="checkbox"]:checked + label {
+    color: #7a5cff;
+    font-weight: bold;/* Если пользователь выбирает фильтр, он немного подсвечивается: */
+}
+
+/* ЗАСТЫВШАЯ ПЛАШКА !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+
+
+
+
+
+input[type="checkbox"] {
+    accent-color: #7a5cff; /* Фиолетовый цвет, как у кнопки */
+}
+
+button#applyFilters {
+    margin-top: 15px;
+    padding: 10px;
+    background: #7a5cff; /* Соответствует кнопке */
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 19px;
+    transition: background 0.3s ease;
+}
+
+button#applyFilters:hover {
+    background: #5a42d6; /* Затемнение при наведении */
+}
+
+
+/* Затемнение при наведении */
+button#applyFilters {
+    transform: scale(1);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button#applyFilters:hover {
+    transform: scale(1.02);
+}
+
+
+.filtered-banks {
+    margin-top: 20px;
+}
+
+.filtered-banks h3 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.filtered-banks .bank-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    color: #ffffff;
+}
+.filtered-banks .bank-card {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.filtered-banks .bank-card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
+/* АНИМАЦИЯ ПРИ ВХОДЕ НА САЙТ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+.fade-in {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade-in.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* АНИМАЦИЯ КАРТОЧЕК ТИПО 3D !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+.bank-card {
+  transition: transform 0.1s ease, box-shadow 0.2s ease;
+  transform-style: preserve-3d;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2),
+              -5px -5px 150px rgba(255, 255, 255, 0.3);
+  will-change: transform;
+}
+
+.bank-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.3),
+              -15px -15px 30px rgba(255, 255, 255, 0.7);
+}
+
+/* Эффект блика */
+.bank-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 10%, transparent 80%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.bank-card:hover::before {
+  opacity: 0.1;
+}
+
+
+
+
+
+/* ИЗМЕНЁННЫЕ КАРТОЧКИ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+.bank-container {
+  display: flex;
+  flex-direction: column; /* Столбцом */
+  align-items: center; /* Центрируем карточки */
+  gap: 20px; /* Добавляем отступы */
+}
+
+.bank-card {
+  width: 80%; /* Увеличиваем ширину карточки */
+  max-width: 800px; /* Ограничиваем ширину */
+  height: 200px; /* Делаем прямоугольные */
+  border-radius: 15px; /* Закругляем углы */
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.bank-card img {
+  width: 150px; /* Фиксированный размер логотипа */
+  height: auto;
+  margin-right: 20px;
+}
+
+/* КНОПОЧКА)))) СКРОЛА ДО ПЛАШКИ СРАВНЕНИЯ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+#scrollToFilter {
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background-color: #8000ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+}
+
+#scrollToFilter:hover {
+    background-color: #6200cc;
+}
+
+
+
+
