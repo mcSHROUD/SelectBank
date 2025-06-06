@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Мой выбор банков | SelectBank</title>
+    <link rel="stylesheet" href="styles/profile.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">SelectBank</a>
+        <div class="auth-panel">
+            <span id="user-name"></span>
+            <button id="logout-btn">Выйти</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Мои сохранённые банки</h1>
+        
+        <div class="favorites-filter">
+            <input type="text" id="search-banks" placeholder="Поиск по моим банкам...">
+            <select id="sort-banks">
+                <option value="rating">По рейтингу</option>
+                <option value="name">По названию</option>
+            </select>
+        </div>
+        
+        <div class="favorites-list" id="favorites-container">
+            <!-- Банки будут добавляться через JS -->
+        </div>
+        
+        <div class="empty-state" id="empty-favorites">
+            <img src="images/empty-favorites.svg" alt="Нет избранных">
+            <p>Вы пока не добавили ни одного банка в избранное</p>
+            <a href="index.html" class="btn">Найти банки</a>
+        </div>
+    </main>
+
+    <script src="scripts/profile.js"></script>
+</body>
+</html>
