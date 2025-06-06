@@ -1,40 +1,278 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SelectBank - Т-Банк</title>
-    <link rel="stylesheet" href="styles/main.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        .bank-info img {
-            width: 280px;
-            height: 100px;
-            margin-bottom: 20px;
-        }
-        .bank-info p {
-            font-size: 16px;
-            line-height: 1.6;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SelectBank - Т-Банк</title>
+  <link rel="stylesheet" href="styles/main.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    .product-info {
+      margin-bottom: 30px;
+      padding: 20px;
+      background: #f0e6f6;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .product-info h2 {
+      color: #6c2eb9;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    .section {
+      margin-bottom: 20px;
+    }
+    .section h3 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .section ul {
+      padding-left: 20px;
+    }
+    .section li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+  </style>
 </head>
 <body>
-    <!-- Шапка -->
-    <header>
-        <h1>SelectBank - Т-Банк</h1>
-    </header>
+  <!-- Шапка -->
+  <header>
+    <h1>SelectBank - Кредитные продукты Т-Банка</h1>
+  </header>
 
-    <!-- Основной контент -->
-    <div class="container">
-        <div class="bank-info">
-            <img src="D:\Sublime Text 3\SelectBank\images\logo-T-Bank.png" alt="Т-Банк">
-            <h2>Т-Банк</h2>
-            <p><strong>Процентная ставка:</strong> 5.5%</p>
-            <p><strong>Условия вклада:</strong> От 3 месяцев</p>
-            <p><strong>Рейтинг:</strong> ★★★★★</p>
-            <p>Т-Банк — крупнейший банк России, предлагающий широкий спектр услуг для частных и корпоративных клиентов.</p>
-        </div>
-        <button class="back-button" onclick="window.location.href='index.html'">Назад к списку банков</button>
+  <!-- Основной контент -->
+  <div class="container">
+    <div class="bank-info">
+      <img src="D:/Sublime Text 3/SelectBank/images/logo-T-Bank.png" alt="Т-Банк" />
+      <h2>Т-Банк</h2>
+      <p>Т-Банк — универсальный российский банк, предлагающий широкий выбор кредитных программ: от потребительских займов до ипотеки с господдержкой.</p>
     </div>
+
+    <div id="productsContainer"></div>
+
+    <button class="back-button" onclick="window.location.href='index.html'">Назад к списку банков</button>
+    <button class="compare-button" onclick="addToComparison('Т-Банк')">Сравнить</button>
+  </div>
+
+  <script>
+    const products = [
+  {
+  "банки": [
+    {
+      "банк": "Т-Банк",
+      "программы": [
+        {
+          "название": "Наличными",
+          "тип": "Потребительский кредит",
+          "ставка_от": "24%",
+          "полн_стоимость_кредита": "24.034% – 29.469%",
+          "сумма": "от 50 000 ₽ до 5 000 000 ₽",
+          "срок": "от 6 месяцев до 5 лет",
+          "особенности": [
+            "Минимум документов — только паспорт",
+            "Без залога и поручителей",
+            "Быстрое одобрение"
+          ],
+          "требования": {
+            "возраст": "от 18 лет",
+            "гражданство": "РФ",
+            "регистрация": "постоянная или временная в РФ"
+          },
+          "ссылка": "https://www.tbank.ru/loans/cash-loan/"
+        },
+        {
+          "название": "Автокредит",
+          "тип": "Целевой кредит",
+          "ставка_от": "24%",
+          "полн_стоимость_кредита": "24.112% – 29.498%",
+          "сумма": "до 5 000 000 ₽",
+          "срок": "до 5 лет",
+          "особенности": [
+            "Без справок о доходах и поручителей",
+            "Кредит без КАСКО",
+            "Решение за 5 минут"
+          ],
+          "требования": {
+            "возраст": "от 18 лет",
+            "гражданство": "РФ",
+            "регистрация": "постоянная или временная в РФ"
+          },
+          "ссылка": "https://www.tbank.ru/loans/auto-loan/"
+        },
+        {
+          "название": "Рефинансирование",
+          "тип": "Потребительский кредит",
+          "ставка_от": "24%",
+          "полн_стоимость_кредита": "24.112% – 29.471%",
+          "сумма": "до 5 000 000 ₽",
+          "срок": "до 5 лет",
+          "особенности": [
+            "Объединение до 5 кредитов в один",
+            "Снижение ежемесячного платежа",
+            "Онлайн оформление"
+          ],
+          "требования": {
+            "возраст": "от 18 лет",
+            "гражданство": "РФ",
+            "регистрация": "постоянная или временная в РФ"
+          },
+          "ссылка": "https://www.tbank.ru/loans/refinance/"
+        },
+        {
+          "название": "Ипотека на вторичное жилье",
+          "тип": "Ипотека",
+          "ставка_от": "24%",
+          "полн_стоимость_кредита": "24.116% – 29.135%",
+          "сумма": "от 500 000 ₽ до 50 000 000 ₽",
+          "срок": "от 3 до 30 лет",
+          "особенности": [
+            "Без подтверждения дохода",
+            "Онлайн сделка",
+            "Необходимы паспорт и СНИЛС"
+          ],
+          "требования": {
+            "возраст": "от 21 года",
+            "гражданство": "РФ",
+            "регистрация": "постоянная в РФ"
+          },
+          "ссылка": "https://www.tbank.ru/mortgage/"
+        },
+        {
+          "название": "Ипотека на новостройки",
+          "тип": "Ипотека",
+          "ставка_от": "24%",
+          "полн_стоимость_кредита": "24.039% – 29.948%",
+          "сумма": "до 50 000 000 ₽",
+          "срок": "до 30 лет",
+          "требования": {
+            "возраст": "от 21 года",
+            "гражданство": "РФ",
+            "регистрация": "постоянная в РФ"
+          },
+          "ссылка": "https://www.tbank.ru/mortgage/"
+        },
+        {
+          "название": "Семейная ипотека",
+          "тип": "Льготная ипотека",
+          "ставка_от": "6%",
+          "полн_стоимость_кредита": "24.039% – 29.948%",
+          "сумма": "до 12 000 000 ₽",
+          "срок": "до 30 лет",
+          "особенности": [
+            "Льготная ставка для семей",
+            "Возможность приобретения жилья с господдержкой"
+          ],
+          "требования": {
+            "возраст": "от 21 года",
+            "гражданство": "РФ",
+            "наличие детей": "2 и более"
+          },
+          "ссылка": "https://www.tbank.ru/mortgage/"
+        },
+        {
+          "название": "Ипотека на строительство",
+          "тип": "Ипотека",
+          "ставка_от": "6%",
+          "полн_стоимость_кредита": "26.818% – 30.211%",
+          "сумма": "до 30 000 000 ₽",
+          "срок": "до 30 лет",
+          "требования": {
+            "возраст": "от 21 года",
+            "гражданство": "РФ",
+            "регистрация": "постоянная в РФ"
+          },
+          "ссылка": "https://www.tbank.ru/mortgage/"
+        },
+        {
+          "название": "Образовательный кредит с господдержкой",
+          "тип": "Целевой кредит",
+          "ставка_от": "3%",
+          "полн_стоимость_кредита": "2.95% – 3.00%",
+          "сумма": "до 6 000 000 ₽",
+          "срок": "срок обучения + 9 месяцев льготного периода + до 15 лет",
+          "особенности": [
+            "Использование только на оплату обучения в аккредитованных вузах РФ",
+            "Льготный период с частичной оплатой процентов во время обучения",
+            "Погашение основного долга начинается после окончания льготного периода"
+          ],
+          "требования": {
+            "возраст": "от 14 до 70 лет",
+            "гражданство": "РФ",
+            "регистрация": "постоянная или временная в РФ",
+            "необходимые документы": "паспорт, СНИЛС, договор с вузом",
+            "для несовершеннолетних": "письменное согласие родителей или попечителей"
+          },
+          "особые_условия": {
+            "льготный_период": {
+              "длительность": "срок обучения + 9 месяцев",
+              "платежи": {
+                "1-й год": "40% от начисленных процентов",
+                "2-й год": "60% от начисленных процентов",
+                "с 3-го года": "100% от начисленных процентов"
+              }
+            },
+            "возможность_увеличения_кредита": "при повышении стоимости обучения",
+            "сохранение_условий": "при переходе в другой аккредитованный вуз",
+            "академический_отпуск": "с продлением срока кредита"
+          },
+          "ссылка": "https://www.tbank.ru/loans/cash-loan/education/"
+        }
+      ]
+    };
+
+  function renderProducts() {
+    const container = document.getElementById('productsContainer');
+
+    products.forEach(product => {
+        const productHTML = `
+            <div class="product-info">
+                <h2>${product["тип продукта"]}</h2>
+                ${product["описание"] ? `<p class="highlight">${product["описание"]}</p>` : ''}
+
+                ${Object.entries(product["разделы"]).map(([sectionName, sectionData]) => `
+                    <div class="section">
+                        <h3>${sectionName}</h3>
+                        <ul>
+                            ${Object.entries(sectionData).map(([key, value]) => {
+                                if (Array.isArray(value)) {
+                                    return `<li><strong>${key}:</strong> ${value.join(', ')}</li>`;
+                                } else if (typeof value === 'object') {
+                                    return Object.entries(value).map(([subKey, subValue]) =>
+                                        `<li><strong>${subKey}:</strong> ${subValue}</li>`
+                                    ).join('');
+                                } else {
+                                    return `<li><strong>${key}:</strong> ${value}</li>`;
+                                }
+                            }).join('')}
+                        </ul>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+
+        container.innerHTML += productHTML;
+    });
+}
+
+
+        // Функция для сравнения
+        function addToComparison(bankName) {
+            let comparisonList = JSON.parse(localStorage.getItem('comparisonList')) || [];
+            
+            if (!comparisonList.includes(bankName)) {
+                comparisonList.push(bankName);
+                localStorage.setItem('comparisonList', JSON.stringify(comparisonList));
+                alert(`${bankName} добавлен в список сравнения!`);
+            } else {
+                alert(`${bankName} уже в списке сравнения!`);
+            }
+            
+            window.location.href = 'compare.html';
+        }
+
+        // Загружаем продукты при открытии страницы
+        document.addEventListener('DOMContentLoaded', renderProducts);
+  </script>
 </body>
 </html>

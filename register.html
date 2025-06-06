@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Регистрация</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .register-container {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      position: relative;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      padding: 8px 14px;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      color: #333;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .back-button .arrow {
+      margin-right: 8px;
+      font-size: 16px;
+    }
+
+    .back-button:hover {
+      background-color: #e2e6ea;
+      border-color: #bbb;
+      color: #000;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .hint {
+      font-size: 12px;
+      color: #999;
+      margin-top: 4px;
+    }
+
+    .error {
+      font-size: 13px;
+      color: red;
+      margin-top: 6px;
+      display: none;
+    }
+
+    .register-button {
+      width: 100%;
+      padding: 12px;
+      background-color: #28a745;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .register-button:hover {
+      background-color: #218838;
+    }
+
+    .footer-link {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 14px;
+    }
+
+    .footer-link a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .footer-link a:hover {
+      text-decoration: underline;
+    }
+
+    .input-error {
+      border-color: red !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="register-container">
+    <a href="file:///D:/Sublime%20Text%203/SelectBank/index.html" class="back-button">
+      <span class="arrow">←</span> Назад
+    </a>
+
+    <h2>Регистрация</h2>
+    <form id="registerForm" action="/register" method="post">
+      <div class="form-group">
+        <label for="username">Логин</label>
+        <input type="text" id="username" name="username" required minlength="5" pattern="[a-zA-Z0-9]+" />
+        <div class="hint">Минимум 5 символов. Допустимы латинские буквы (a-z) и цифры (0-9).</div>
+        <div class="error" id="usernameError"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Электронная почта</label>
+        <input type="email" id="email" name="email" required />
+        <div class="error" id="emailError"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Пароль</label>
+        <input type="password" id="password" name="password" required minlength="6" />
+        <div class="hint">Минимум 6 символов. Используйте буквы, цифры и спецсимволы.</div>
+        <div class="error" id="passwordError"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Подтвердите пароль</label>
+        <input type="password" id="confirmPassword" required />
+        <div class="error" id="confirmPasswordError"></div>
+      </div>
+
+      <button type="submit" class="register-button">Зарегистрироваться</button>
+    </form>
+
+    <div class="footer-link">
+      Уже есть аккаунт? <a href="file:///D:/Sublime%20Text%203/SelectBank/login.html">Войти</a>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('registerForm');
+    const username = document.getElementById('username');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirmPassword');
+    
+    const usernameError = document.getElementById('usernameError');
+    const emailError = document.getElementById('emailError');
+    const passwordError = document.getElementById('passwordError');
+    const confirmPasswordError = document.getElementById('confirmPasswordError');
+
+    // Проверка логина
+    username.addEventListener('input', function() {
+      if (username.value.length < 5) {
+        usernameError.textContent = 'Логин должен содержать минимум 5 символов';
+        usernameError.style.display = 'block';
+        username.classList.add('input-error');
+      } else if (!/^[a-zA-Z0-9]+$/.test(username.value)) {
+        usernameError.textContent = 'Только латинские буквы и цифры';
+        usernameError.style.display = 'block';
+        username.classList.add('input-error');
+      } else {
+        usernameError.style.display = 'none';
+        username.classList.remove('input-error');
+      }
+    });
+
+    // Проверка пароля
+    password.addEventListener('input', function() {
+      if (password.value.length < 6) {
+        passwordError.textContent = 'Пароль должен содержать минимум 6 символов';
+        passwordError.style.display = 'block';
+        password.classList.add('input-error');
+      } else {
+        passwordError.style.display = 'none';
+        password.classList.remove('input-error');
+      }
+    });
+
+    // Проверка подтверждения пароля
+    confirmPassword.addEventListener('input', function() {
+      if (password.value !== confirmPassword.value) {
+        confirmPasswordError.textContent = 'Пароли не совпадают';
+        confirmPasswordError.style.display = 'block';
+        confirmPassword.classList.add('input-error');
+      } else {
+        confirmPasswordError.style.display = 'none';
+        confirmPassword.classList.remove('input-error');
+      }
+    });
+
+    // Общая проверка при отправке формы
+    form.addEventListener('submit', function(e) {
+      let isValid = true;
+      
+      // Проверка логина
+      if (username.value.length < 5) {
+        usernameError.textContent = 'Логин должен содержать минимум 5 символов';
+        usernameError.style.display = 'block';
+        username.classList.add('input-error');
+        isValid = false;
+      } else if (!/^[a-zA-Z0-9]+$/.test(username.value)) {
+        usernameError.textContent = 'Только латинские буквы и цифры';
+        usernameError.style.display = 'block';
+        username.classList.add('input-error');
+        isValid = false;
+      }
+      
+      // Проверка пароля
+      if (password.value.length < 6) {
+        passwordError.textContent = 'Пароль должен содержать минимум 6 символов';
+        passwordError.style.display = 'block';
+        password.classList.add('input-error');
+        isValid = false;
+      }
+      
+      // Проверка подтверждения пароля
+      if (password.value !== confirmPassword.value) {
+        confirmPasswordError.textContent = 'Пароли не совпадают';
+        confirmPasswordError.style.display = 'block';
+        confirmPassword.classList.add('input-error');
+        isValid = false;
+      }
+      
+      if (!isValid) {
+        e.preventDefault();
+      }
+    });
+  </script>
+</body>
+</html>
