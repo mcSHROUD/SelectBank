@@ -39,6 +39,93 @@
             position: relative;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
+
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .auth-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+        }
+        
+        .close-auth {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .auth-form input {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .auth-form button {
+            padding: 0.8rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .auth-switch {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .auth-switch a {
+            color: var(--secondary);
+            cursor: pointer;
+        }
+        
+        .error-message {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-top: -0.5rem;
+        }
+        
+        /* Стили для профиля */
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .profile-name {
+            font-weight: 600;
+            color: white;
+        }
+        
+        .logout-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
         
         .header-container {
             display: flex;
@@ -625,7 +712,7 @@
                 <ul class="nav-links" id="navLinks">
                     <li><a href="#">Главная</a></li>
                     
-                    <li><a href="#">Сравнение</a></li>
+                    <li><a href="./compare.html">Сравнение</a></li>
                     
                     <li><a href="#">Контакты</a></li>
                 </ul>
@@ -862,78 +949,7 @@
             </div>
         </section>
         
-        <!-- Фильтр банков -->
-        <section class="filter-section">
-            <h2 class="filter-title">Подбор банка по параметрам</h2>
-            
-            <form id="bankFilterForm">
-                <div class="filter-options">
-                    <div class="filter-group">
-                        <h4>Тип карты</h4>
-                        <div class="filter-checkbox">
-                            <input type="checkbox" id="debit" name="debit">
-                            <label for="debit">Дебетовая</label>
-                        </div>
-                        <div class="filter-checkbox">
-                            <input type="checkbox" id="credit" name="credit">
-                            <label for="credit">Кредитная</label>
-                        </div>
-                    </div>
-                    
-                    <div class="filter-group">
-                        <h4>Преимущества</h4>
-                        <div class="filter-checkbox">
-                            <input type="checkbox" id="cashback" name="cashback">
-                            <label for="cashback">Кэшбэк</label>
-                        </div>
-                        <div class="filter-checkbox">
-                            <input type="checkbox" id="low-interest" name="low-interest">
-                            <label for="low-interest">Низкий процент</label>
-                        </div>
-                        <div class="filter-checkbox">
-                            <input type="checkbox" id="mobile-app" name="mobile-app">
-                            <label for="mobile-app">Мобильное приложение</label>
-                        </div>
-                    </div>
-                    
-                    <div class="filter-group">
-                        <h4>Обслуживание</h4>
-                        <div class="filter-checkbox">
-                            <input type="checkbox" id="free" name="free">
-                            <label for="free">Бесплатное</label>
-                        </div>
-                        <div class="filter-checkbox">
-                            <input type="checkbox" id="premium" name="premium">
-                            <label for="premium">Премиум</label>
-                        </div>
-                    </div>
-                    
-                    <div class="filter-group">
-                        <h4>Дополнительно</h4>
-                        <div class="filter-checkbox">
-                            <input type="checkbox" id="insurance" name="insurance">
-                            <label for="insurance">Страхование</label>
-                        </div>
-                        <div class="filter-checkbox">
-                            <input type="checkbox" id="investments" name="investments">
-                            <label for="investments">Инвестиции</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="filter-actions">
-                    <button type="button" class="btn btn-primary" id="applyFilters">Применить фильтры</button>
-                    <button type="reset" class="btn btn-outline">Сбросить</button>
-                </div>
-            </form>
-            
-            <div class="filter-results">
-                <h3>Найдено банков: <span id="banksCount">12</span></h3>
-                <div id="filteredBanksList" class="bank-grid">
-                    <!-- Здесь будут отображаться отфильтрованные банки -->
-                </div>
-            </div>
-        </section>
+        
     </div>
 
     <!-- Модальное окно -->
@@ -1069,13 +1085,6 @@
             alert('Фильтры применены! В реальном приложении здесь будет фильтрация банков.');
         });
         
-        // Поиск банков (заглушка)
-        document.querySelector('.search-bar button').addEventListener('click', () => {
-            const searchTerm = document.querySelector('.search-bar input').value;
-            if (searchTerm) {
-                alert(`Поиск по запросу: "${searchTerm}". В реальном приложении здесь будет поиск банков.`);
-            }
-        });
     </script>
 </body>
 </html>
