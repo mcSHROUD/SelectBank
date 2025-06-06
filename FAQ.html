@@ -3,34 +3,267 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Частые вопросы</title>
-    <link rel="stylesheet" href="styles/FAQ.css"> <!-- Подключаем стили -->
+    <title>Частые вопросы | SelectBank</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Базовые стили */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f5f7fa;
+            padding-bottom: 50px;
+        }
+        
+        /* Шапка */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+        
+        /* Основной контент */
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* FAQ */
+        .faq {
+            margin-top: 1.5rem;
+        }
+        
+        .faq-item {
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .faq-question {
+            width: 100%;
+            padding: 1.2rem 1.5rem;
+            text-align: left;
+            background-color: white;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+        
+        .faq-question:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .faq-question::after {
+            content: '▾';
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+        
+        .faq-question.active::after {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background-color: #f8f9fa;
+            color: var(--dark);
+            line-height: 1.7;
+        }
+        
+        .faq-answer.active {
+            padding: 1rem 1.5rem 1.5rem;
+            max-height: 500px;
+        }
+        
+        .faq-answer p {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Кнопка "Назад" */
+        .back-button {
+            display: inline-block;
+            margin: 1.5rem 0 0 1.5rem;
+            padding: 0.6rem 1.2rem;
+            background-color: var(--light);
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .back-button:hover {
+            background-color: #e2e6ea;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .faq-question {
+                font-size: 1rem;
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Кнопка "Назад" -->
+    <a href="index.html" class="back-button">← На главную</a>
+
+    <!-- Шапка -->
     <header>
         <h1>Частые вопросы</h1>
     </header>
 
+    <!-- Основной контент -->
     <main>
         <section class="faq">
             <div class="faq-item">
-                <button class="faq-question">Как подбирать банк? ▾</button>
-                <div class="faq-answer">Выбирайте банк по нужным параметрам в фильтре.</div>
+                <button class="faq-question">Как правильно подобрать банк?</button>
+                <div class="faq-answer">
+                    <p>Для подбора оптимального банка рекомендуем:</p>
+                    <ol>
+                        <li>Определите свои основные потребности (кредиты, депозиты, карты и т.д.)</li>
+                        <li>Используйте фильтр на главной странице для выбора по параметрам</li>
+                        <li>Сравните несколько банков по ключевым показателям</li>
+                        <li>Ознакомьтесь с отзывами клиентов</li>
+                    </ol>
+                    <p>Наш сервис поможет вам сделать осознанный выбор!</p>
+                </div>
             </div>
 
             <div class="faq-item">
-                <button class="faq-question">Какие банки доступны? ▾</button>
-                <div class="faq-answer">Мы работаем с ведущими банками страны.</div>
+                <button class="faq-question">Какие банки представлены в вашем сервисе?</button>
+                <div class="faq-answer">
+                    <p>Мы сотрудничаем с ведущими банками России, включая:</p>
+                    <ul>
+                        <li>Сбербанк</li>
+                        <li>ВТБ</li>
+                        <li>Тинькофф</li>
+                        <li>Альфа-Банк</li>
+                        <li>Газпромбанк</li>
+                        <li>и другие крупные финансовые организации</li>
+                    </ul>
+                    <p>Список регулярно обновляется и пополняется новыми участниками.</p>
+                </div>
             </div>
 
             <div class="faq-item">
-                <button class="faq-question">Как связаться с поддержкой? ▾</button>
-                <div class="faq-answer">Вы можете написать нам на email или в чат поддержки.</div>
+                <button class="faq-question">Как связаться со службой поддержки?</button>
+                <div class="faq-answer">
+                    <p>Вы можете обратиться в нашу службу поддержки следующими способами:</p>
+                    <ul>
+                        <li><strong>Электронная почта:</strong> support@selectbank.ru</li>
+                        <li><strong>Телефон:</strong> +7 (800) 123-45-67 (бесплатно по России)</li>
+                        <li><strong>Онлайн-чат:</strong> доступен в правом нижнем углу сайта</li>
+                        <li><strong>Telegram:</strong> @selectbank_support</li>
+                    </ul>
+                    <p>Время работы поддержки: ежедневно с 8:00 до 22:00 по московскому времени.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Как часто обновляются данные о банках?</button>
+                <div class="faq-answer">
+                    <p>Мы тщательно следим за актуальностью информации:</p>
+                    <ul>
+                        <li>Тарифы и процентные ставки обновляются ежедневно</li>
+                        <li>Общие данные о банках проверяются еженедельно</li>
+                        <li>Крупные изменения (лицензии, слияния) отражаются в течение 24 часов</li>
+                    </ul>
+                    <p>Если вы заметили устаревшую информацию, пожалуйста, сообщите нам через форму обратной связи.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Можно ли доверять вашим рейтингам?</button>
+                <div class="faq-answer">
+                    <p>Наши рейтинги полностью объективны и основываются на:</p>
+                    <ul>
+                        <li>Официальных данных ЦБ РФ</li>
+                        <li>Анализе тарифов и условий банков</li>
+                        <li>Отзывах реальных клиентов</li>
+                        <li>Экспертных оценках финансовых аналитиков</li>
+                    </ul>
+                    <p>Мы не принимаем оплату от банков за улучшение их позиций в рейтингах.</p>
+                </div>
             </div>
         </section>
     </main>
 
-    <!-- Скрипт подключаем в конце body -->
-    <script src="scripts/main.js" defer></script> <!-- Подключаем JS -->
+    <!-- Скрипт для работы FAQ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const item = question.parentNode;
+                    const answer = question.nextElementSibling;
+                    
+                    // Закрываем все открытые вопросы
+                    document.querySelectorAll('.faq-answer.active').forEach(activeAnswer => {
+                        if (activeAnswer !== answer) {
+                            activeAnswer.classList.remove('active');
+                            activeAnswer.previousElementSibling.classList.remove('active');
+                        }
+                    });
+                    
+                    // Переключаем текущий вопрос
+                    question.classList.toggle('active');
+                    answer.classList.toggle('active');
+                });
+            });
+            
+            // Открываем первый вопрос по умолчанию
+            if (faqQuestions.length > 0) {
+                faqQuestions[0].classList.add('active');
+                faqQuestions[0].nextElementSibling.classList.add('active');
+            }
+        });
+    </script>
 </body>
 </html>
